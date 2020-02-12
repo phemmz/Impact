@@ -13,6 +13,9 @@ const CardWrapper = styled.div`
   border-radius: 0.4rem;
   background-color: #fff;
   box-shadow: 0 5px 15px rgba(0,0,0,.08);
+  @media(max-width: 600px) {
+    width: 100%;
+  }
 `;
 
 const TopSection = styled.div`

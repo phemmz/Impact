@@ -20,8 +20,14 @@ const Provider = ({ children }) => {
     return false;
   }
 
+  const logout = () => {
+    localStorage.removeItem('isAuthenticated');
+    localStorage.setItem('isAuthenticated', false);
+    setAdmin(false);
+  }
+
   return (
-    <GeneralContext.Provider value={{ isAdmin, setAdmin, login }}>
+    <GeneralContext.Provider value={{ isAdmin, setAdmin, login, logout }}>
       {children}
     </GeneralContext.Provider>
   );

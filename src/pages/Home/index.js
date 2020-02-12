@@ -65,6 +65,19 @@ const CardWrapper = styled.div`
   }
 `;
 
+const LogoutBtn = styled.button`
+  width: 4rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 1rem;
+  border-radius: 0.4rem;
+  border: 1px solid #e3e9ed;
+  background-color: #fff;
+  cursor: pointer;
+`;
+
 const Home = () => {
   const data = JSON.parse(localStorage.getItem('businesses'));
   const carouselIndex = {};
@@ -78,7 +91,7 @@ const Home = () => {
   const [searchValue, setInput] = useState('');
   const [inputValues, setBusinessInput] = useState(inputDefaultValues);
   const [errorMessages, setErrorMessages] = useState(false);
-  const { isAdmin } = useContext(GeneralContext);
+  const { isAdmin, logout } = useContext(GeneralContext);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [defaultValue, setSelectDefault] = useState([]);
   const [isEdit, setEdit] = useState(false);
@@ -180,7 +193,7 @@ const Home = () => {
     <HomeWrapper>
       <div style={{ height: '4rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem', borderBottom: '1px solid #fbf9f9', backgroundColor: '#fff' }}>
         <h1 style={{ margin: 0, color: '#122330' }}>Impact</h1>
-        <div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
           <Input
             name="search"
             placeholder="Search"
@@ -188,6 +201,7 @@ const Home = () => {
             autoComplete="off"
             value={searchValue}
           />
+          {isAdmin ? <LogoutBtn onClick={logout}>Logout</LogoutBtn> : null}
         </div>
       </div>
       <div style={{ padding: '1rem' }}>
