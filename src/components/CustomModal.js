@@ -24,6 +24,14 @@ const Header = styled.h2`
   margin: 0 0 1rem 0;
 `;
 
+const FormWrapper = styled.div`
+  min-width: 25rem;
+  @media(max-width: 460px) {
+    width: 100%;
+    min-width: 100%;
+  }
+`;
+
 const Label = styled.span`
   margin: 0 0 0.5rem 0;
   font-size: 0.8rem;
@@ -47,7 +55,7 @@ const Button = styled.button`
 
 const Input = styled.input`
   height: 2.2rem;
-  width: 25rem;
+  width: 100%;
   padding: 0.1rem 0.4rem;
   border-radius: 0.4rem;
   border: 1px solid #e3e9ed;
@@ -76,6 +84,15 @@ const CloseBtn = styled.button`
   background-color: transparent;
   &:focus {
     outline: 0;
+  }
+`;
+
+const ModalWrapper = styled.div`
+  @media(max-width: 460px) {
+    width: 15rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `;
 
@@ -121,48 +138,50 @@ const CustomModal = ({
       onRequestClose={toggleModal}
       style={customStyles}
     >
-      <CloseBtn onClick={toggleModal}>
-        <img src={close} width="14px" height="14px" alt="close"  />
-      </CloseBtn>
-      <div>
-        <Header>Add Business</Header>
-        <form onSubmit={handleSubmit}>
-          {
-            inputFields.map(({ name, label }) => {
-              return (
-                <div
-                  key={name}
-                  style={{ display: 'flex', flexDirection: 'column', marginBottom: '0.8rem' }}
-                >
-                  <Label>{label}</Label>
-                  {name === 'category' ? (
-                    <Select
-                      isMulti
-                      onChange={handleMultiSelect}
-                      options={options}
-                      defaultValue={defaultValue}
-                      style={{
-                        control: styles => ({ ...styles, width: '20rem' })
-                      }}
-                    />
-                  ) : (
-                    <Input
-                      name={name}
-                      onChange={handleInputChange}
-                      autoComplete="off"
-                      value={inputValues[name]}
-                      required
-                    />
-                  )}
-                </div>
-              );
-            })
-          }
-          <Button>
-            Submit
-          </Button>
-        </form>
-      </div>
+      <ModalWrapper>
+        <CloseBtn onClick={toggleModal}>
+          <img src={close} width="14px" height="14px" alt="close"  />
+        </CloseBtn>
+        <FormWrapper>
+          <Header>Add Business</Header>
+          <form onSubmit={handleSubmit}>
+            {
+              inputFields.map(({ name, label }) => {
+                return (
+                  <div
+                    key={name}
+                    style={{ display: 'flex', flexDirection: 'column', marginBottom: '0.8rem' }}
+                  >
+                    <Label>{label}</Label>
+                    {name === 'category' ? (
+                      <Select
+                        isMulti
+                        onChange={handleMultiSelect}
+                        options={options}
+                        defaultValue={defaultValue}
+                        style={{
+                          control: styles => ({ ...styles, width: '20rem' })
+                        }}
+                      />
+                    ) : (
+                      <Input
+                        name={name}
+                        onChange={handleInputChange}
+                        autoComplete="off"
+                        value={inputValues[name]}
+                        required
+                      />
+                    )}
+                  </div>
+                );
+              })
+            }
+            <Button>
+              Submit
+            </Button>
+          </form>
+        </FormWrapper>
+      </ModalWrapper>
     </Modal>
   );
 }

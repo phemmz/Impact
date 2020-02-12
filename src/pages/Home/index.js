@@ -232,6 +232,7 @@ const Home = () => {
                 category={category}
                 handleDelete={handleDelete}
                 handleEditButton={handleEditButton}
+                isAdmin={isAdmin}
               />
             );
           })}
@@ -239,7 +240,7 @@ const Home = () => {
       </div>
       <CustomModal
         modalIsOpen={modalIsOpen}
-        onRequestClose={toggleModal}
+        toggleModal={toggleModal}
         handleInputChange={handleInputChange}
         inputValues={inputValues}
         defaultValue={defaultValue}
